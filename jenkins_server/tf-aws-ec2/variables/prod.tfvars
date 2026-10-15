@@ -1,0 +1,11 @@
+aws_region             = "us-east-1"
+environment            = "prod"
+vpc_name               = "jenkins-vpc-prod"
+vpc_cidr               = "10.40.0.0/16"
+public_subnets         = ["10.40.1.0/24", "10.40.2.0/24", "10.40.3.0/24"]
+instance_type          = "t3.large"
+jenkins_ec2_instance   = "Jenkins-Build-Server"
+jenkins_security_group = "jenkins-sg"
+key_pair_name          = "REPLACE_WITH_EXISTING_KEY_PAIR"
+instance_profile_name  = "REPLACE_WITH_JENKINS_INSTANCE_PROFILE"
+admin_cidrs            = ["203.0.113.10/32"]

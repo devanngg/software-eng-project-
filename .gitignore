@@ -1,0 +1,17 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+crash.log
+crash.*.log
+awscliv2.zip
+get_helm.sh
+kubectl
+
+# Local credentials and kubeconfig files
+.aws/
+.kube/
+credentials
+*.pem
+*.log

@@ -1,0 +1,11 @@
+aws_region             = "us-east-1"
+environment            = "dev"
+vpc_name               = "jenkins-vpc"
+vpc_cidr               = "10.0.0.0/16"
+public_subnets         = ["10.0.1.0/24"]
+instance_type          = "t3.large"
+jenkins_ec2_instance   = "Jenkins-Build-Server"
+jenkins_security_group = "jenkins-sg"
+key_pair_name          = "REPLACE_WITH_EXISTING_KEY_PAIR"
+instance_profile_name  = "REPLACE_WITH_JENKINS_INSTANCE_PROFILE"
+admin_cidrs            = ["203.0.113.10/32"]

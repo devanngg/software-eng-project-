@@ -1,0 +1,10 @@
+aws_region                           = "us-east-1"
+environment                          = "prod"
+vpc_name                             = "eks-vpc-prod"
+cluster_name                         = "my-eks-cluster-prod"
+vpc_cidr                             = "10.20.0.0/16"
+public_subnets                       = ["10.20.1.0/24", "10.20.2.0/24", "10.20.3.0/24"]
+private_subnets                      = ["10.20.11.0/24", "10.20.12.0/24", "10.20.13.0/24"]
+instance_type                        = "t3.medium"
+cluster_version                      = "1.36"
+cluster_endpoint_public_access_cidrs = ["203.0.113.10/32"]

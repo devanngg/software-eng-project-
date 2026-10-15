@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-site
+data:
+  index.html: |
+    <!doctype html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="theme-color" content="#101522">
+      <title>Cloud Native Delivery | Project Demo</title>
+      <style>
+        :root{color-scheme:dark;--bg:#0b1020;--panel:#121a2d;--line:#25314a;--text:#f4f7fb;--muted:#a5b1c7;--mint:#77e0c0;--blue:#8fb5ff;--amber:#ffd180}
+        *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#182849 0,transparent 42%),var(--bg);color:var(--text);font:16px/1.6 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+        .wrap{width:min(1080px,calc(100% - 40px));margin:auto}.top{padding:26px 0;border-bottom:1px solid #ffffff15}.brand{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#c6d4ee}.brand span{color:var(--mint)}
+        .hero{padding:72px 0 46px}.tag{display:inline-flex;align-items:center;gap:9px;border:1px solid #77e0c055;border-radius:99px;padding:7px 12px;color:var(--mint);font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}.dot{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 14px var(--mint)}h1{max-width:770px;margin:22px 0 16px;font-size:clamp(42px,7vw,76px);line-height:1.02;letter-spacing:-.055em}.lead{max-width:690px;color:var(--muted);font-size:19px;margin:0}.hero strong{color:var(--text)}
+        .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:34px 0 60px}.stat,.card,.step{background:linear-gradient(145deg,#141e33,#101728);border:1px solid var(--line);border-radius:16px}.stat{padding:20px}.stat b{display:block;font-size:25px;line-height:1.2}.stat span{color:var(--muted);font-size:13px}
+        h2{font-size:26px;letter-spacing:-.03em;margin:0 0 18px}.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.step{padding:20px;position:relative;min-height:190px}.step small{color:var(--mint);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.step h3{font-size:18px;margin:12px 0 6px}.step p,.card p{color:var(--muted);font-size:14px;margin:0}.step .tool{display:inline-block;margin-top:16px;padding:4px 9px;border-radius:6px;background:#ffffff0c;color:#dce6f7;font-size:12px}
+        .note{margin:24px 0 56px;padding:17px 20px;border-left:3px solid var(--amber);background:#ffd1800d;color:#d6dfed;border-radius:0 10px 10px 0;font-size:14px}.note b{color:var(--amber)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:56px}.card{padding:24px}.card h3{margin:0 0 8px;font-size:18px}.commands{margin-top:14px;background:#080c15;border:1px solid #28334a;border-radius:10px;padding:14px;color:#d9e5f7;font:13px/1.8 ui-monospace,SFMono-Regular,Menlo,monospace;overflow:auto}.footer{border-top:1px solid #ffffff15;padding:24px 0 36px;color:var(--muted);font-size:13px}.footer strong{color:#dbe6f7}
+        @media(max-width:760px){.flow{grid-template-columns:1fr 1fr}.hero{padding-top:48px}}@media(max-width:520px){.stats,.flow,.grid{grid-template-columns:1fr}.step{min-height:auto}.wrap{width:min(100% - 28px,1080px)}}
+      </style>
+    </head>
+    <body>
+      <header class="top"><div class="wrap brand">Cloud Native <span>·</span> Software Engineering Project</div></header>
+      <main class="wrap">
+        <section class="hero">
+          <div class="tag"><i class="dot"></i> Local demo · Kubernetes is running</div>
+          <h1>From infrastructure code to a running app.</h1>
+          <p class="lead">A hands-on CI/CD project that brings together <strong>Terraform, Jenkins, Docker, and Kubernetes</strong>—demonstrated here locally with kind, without creating AWS resources.</p>
+        </section>
+        <section class="stats" aria-label="Live demo details">
+          <div class="stat"><b>kind</b><span>Local Kubernetes cluster on Docker</span></div>
+          <div class="stat"><b>2 / 2</b><span>NGINX application replicas ready</span></div>
+          <div class="stat"><b>eks-nginx-app</b><span>Kubernetes namespace</span></div>
+        </section>
+        <section id="flow">
+          <h2>How the project fits together</h2>
+          <div class="flow">
+            <article class="step"><small>01 · Infrastructure</small><h3>Terraform</h3><p>Defines the network, private subnets, and EKS cluster for the AWS deployment.</p><span class="tool">Infrastructure as code</span></article>
+            <article class="step"><small>02 · Delivery</small><h3>Jenkins</h3><p>Pipeline checks configuration, creates a plan, waits for approval, then deploys.</p><span class="tool">CI/CD pipeline</span></article>
+            <article class="step"><small>03 · Workload</small><h3>Kubernetes</h3><p>Runs two NGINX replicas with health checks and defined resource limits.</p><span class="tool">Deployment · Service</span></article>
+            <article class="step"><small>04 · This demo</small><h3>kind + Docker</h3><p>Runs the same Kubernetes app locally. Open the port-forwarded page in your browser.</p><span class="tool">No AWS resources</span></article>
+          </div>
+        </section>
+        <aside class="note"><b>Local demo note</b> — The project includes AWS/EKS Terraform and Jenkins deployment code, but this page is served by the local kind cluster. The Kubernetes LoadBalancer address is cloud-specific, so this demo uses port-forwarding.</aside>
+        <section class="grid">
+          <article class="card"><h3>Show the running workload</h3><p>In a second Terminal window, show the pods and service that serve this page.</p><div class="commands">kubectl get pods,service -n eks-nginx-app</div></article>
+          <article class="card"><h3>Explore the source</h3><p>In VS Code, walk through <strong>tf-aws-eks/</strong>, <strong>Jenkinsfile</strong>, and <strong>manifest/</strong>. The architecture diagram is in the project root as <strong>image.png</strong>.</p><div class="commands">README.md → Jenkinsfile → manifest/</div></article>
+        </section>
+      </main>
+      <footer class="footer"><div class="wrap"><strong>Software Engineering Project</strong> · Local Kubernetes demo · NGINX</div></footer>
+    </body>
+    </html>

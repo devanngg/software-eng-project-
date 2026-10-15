@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    options {
+        timestamps()
+        disableConcurrentBuilds()
+    }
+
+    stages {
+        stage('Validate tools') {
+            steps {
+                sh 'docker version'
+                sh 'kind version'
+                sh 'kubectl version --client'
+            }
+        }
+
+        stage('Deploy locally') {
+            steps {
+                sh './scripts/local-kubernetes.sh up'
+            }
+        }
+
+        stage('Verify locally') {
+            steps {
+                sh 'kubectl get pods,service -n eks-nginx-app'
+                sh 'kubectl rollout status deployment/nginx -n eks-nginx-app --timeout=5m'
+            }
+        }
+    }
+
+    post {
+        always {
+            sh 'kubectl get pods,service -n eks-nginx-app || true'
+        }
+    }
+}
